@@ -126,36 +126,46 @@ namespace MitchellP3
             double pen = 1.0;
             double mug = 3.5;
             double usb = 4.0;
-            double costOfText = 0.1;
-            double numColorsPrice = 0.3;
+            double costOfText = 0.05;
+            double costOfLogo = 0.1;
+            double numColorsPrice = 0.03;
 
-            if (itemType == "Pen")
+            if (itemType.Equals("Pen"))
             {
-                basePrice = pen * numItems * costOfText;
-
-            }
-            if(itemType == "Mug")
-            {
-                basePrice = mug * numItems * costOfText;
+                basePrice = (pen * numItems) + (costOfText * numItems);
 
             }
-            if(itemType == "USB")
+            if(itemType.Equals("Mug"))
             {
-                basePrice = usb * numItems * costOfText;
+                basePrice = (mug * numItems) + (costOfText * numItems);
+
+            }
+            if(itemType.Equals("USB"))
+            {
+                basePrice = (usb * numItems) + (costOfText * numItems);
+                
             }
             
             if(numColors != 0)
             {
-                totalPrice = (decimal)(basePrice * numColorsPrice);
+                totalPrice = (decimal)(basePrice + (numColors * numColorsPrice) + (numItems * costOfLogo));
+            }else
+            {
+                totalPrice = (decimal)basePrice;
             }
             
         }
     
         public string GetOrderSummary()
         {
-            string s = " ";
-            //return summary box output??
-            return s;
+            string summary =
+                "Order number: " + ItemID + "\r\n" +
+                NumItems + " " + ItemType +
+                "s with a " + NumColors + "\r color logo with the following text: " +
+                TheText +
+                "\r\nPrice: " + TotalPrice + " ";
+
+            return summary;
         }
     }
     

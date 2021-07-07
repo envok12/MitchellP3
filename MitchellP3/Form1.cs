@@ -35,7 +35,7 @@ namespace MitchellP3
         private void submitButton_Click(object sender, EventArgs e)
         {
             LogoOrderItem order = BuildOrder();
-            string summary = GetOrderSummary(order);
+            string summary = order.GetOrderSummary();
             summaryTextBox.Visible = true;
             summaryTextBox.Text = summary;
         }
@@ -48,22 +48,10 @@ namespace MitchellP3
             order.TheText = textToEngraveTextBox.Text;
             order.ItemType = this.SelectedItemType;
             //order.HasLogo = this.SelectedHasLogo; 
-            //order.NumColors = this.SelectedNumColors;
+            order.NumColors = Int32.Parse(numberOfColorstextBox.Text);
             return order;
         }
 
-        private string GetOrderSummary(LogoOrderItem order)
-        {
-            string summary =
-                "Order number: " + order.ItemID + "\r\n" +
-                order.NumItems + " " + order.ItemType +
-                "s with a " + order.NumColors + "\r color logo with the following text: " +
-                order.TheText +
-                "\r\nPrice: " + order.TotalPrice + " ";
-
-            return summary;
-          
-        }
 
         private string SelectedItemType 
         {
@@ -98,6 +86,8 @@ namespace MitchellP3
             }
             else
             {
+                numberOfColorsLabel.Visible = false;
+                numberOfColorstextBox.Visible = false;
                 numberOfColorstextBox.Text = "0";
             }
         }
