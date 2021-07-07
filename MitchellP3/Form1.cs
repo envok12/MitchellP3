@@ -27,6 +27,8 @@ namespace MitchellP3
             mugRadioButton.Checked = false;
             penRadioButton.Checked = false;
             logoCheckBox.Checked = false;
+            numberOfColorsLabel.Visible = false;
+            numberOfColorstextBox.Visible = false;
             summaryTextBox.Text = " ";
         }
 
@@ -34,6 +36,7 @@ namespace MitchellP3
         {
             LogoOrderItem order = BuildOrder();
             string summary = GetOrderSummary(order);
+            summaryTextBox.Visible = true;
             summaryTextBox.Text = summary;
         }
 
@@ -44,19 +47,19 @@ namespace MitchellP3
             order.NumItems = Int32.Parse(numberOfItemsTextBox.Text);
             order.TheText = textToEngraveTextBox.Text;
             order.ItemType = this.SelectedItemType;
-            order.HasLogo = this.SelectedHasLogo; //needs these to get info from props/meths below
-            order.NumColors = this.SelectedNumColors;
+            //order.HasLogo = this.SelectedHasLogo; 
+            //order.NumColors = this.SelectedNumColors;
             return order;
         }
 
-        private LogoOrderItem GetOrderSummary(LogoOrderItem order)
+        private string GetOrderSummary(LogoOrderItem order)
         {
             string summary =
-                "Order number: " + order.ItemID + "\r" +
+                "Order number: " + order.ItemID + "\r\n" +
                 order.NumItems + " " + order.ItemType +
-                " with a " + order.NumColors + "logo with the following text: " +
+                "s with a " + order.NumColors + "\r color logo with the following text: " +
                 order.TheText +
-                "\r\nPrice: " + order.TotalPrice;
+                "\r\nPrice: " + order.TotalPrice + " ";
 
             return summary;
           
@@ -92,12 +95,11 @@ namespace MitchellP3
                 numberOfColorsLabel.Visible = true;
                 numberOfColorstextBox.Visible = true;
                 
-            }else
+            }
+            else
             {
-                numberOfColorstextBox = "0";
+                numberOfColorstextBox.Text = "0";
             }
         }
-
-
     }
 }
