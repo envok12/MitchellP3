@@ -15,7 +15,7 @@ namespace MitchellP3
         private int numItems = 0;
         private string theText = "none";
         private int itemID = -1;
-        private decimal totalPrice;
+        private decimal totalPrice = 0.0M;
 
 
         public LogoOrderItem(bool hasLogo, string itemType, int numColors, int numItems, string text, int itemID)
